@@ -19,6 +19,7 @@ import Comercio.entidades.Producto;
  */
 public class ConsultaProducto extends javax.swing.JInternalFrame {
     private HashSet<Producto> productos;
+    private Producto auxiliar = null;
     /**
      * Creates new form ConsultaProducto
      */
@@ -159,31 +160,59 @@ public class ConsultaProducto extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
-        //Rescatar el código
-         Pattern p=Pattern.compile("\\d{1,4}");
-        Matcher m=p.matcher(jtCodigo.getText());
-        if(!m.matches()){
-            JOptionPane.showMessageDialog(this, "Ustede debe ing. un nro");
+        
+        int codigo;
+        if (validaEntero(jtCodigo.getText())) {
+            codigo = Integer.parseInt(jtCodigo.getText());
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Ingresar un nro ");
             jtCodigo.requestFocus();
             return;
         }
-        int codigo=Integer.parseInt(jtCodigo.getText());
-        boolean bandera=false;
-        for(Producto prod:productos){
-        
-            if(prod.getCodigo()==codigo){
-                bandera=true;
+
+        for (Producto prod : productos) {
+
+            if (codigo == prod.getCodigo()) {
+
                 jtDescripcion.setText(prod.getDescripcion());
-                jtPrecio.setText(prod.getPrecio()+"");
-                jtStock.setText(prod.getStock()+"");
+                jtPrecio.setText(prod.getPrecio() + "");
+                jtStock.setText(prod.getStock() + "");
                 jtCategoria.setText(prod.getCategoria());
+                
+                auxiliar = prod;
+                return;
+
             }
         }
+
+        JOptionPane.showMessageDialog(this, "Codigo inexistente");
+        limpiarCampos();
+        //Rescatar el código
+         //Pattern p=Pattern.compile("\\d{1,4}");
+        //Matcher m=p.matcher(jtCodigo.getText());
+       // if(!m.matches()){
+       //     JOptionPane.showMessageDialog(this, "Ustede debe ing. un nro");
+       //     jtCodigo.requestFocus();
+       //     return;
+      //  }
+      //  int codigo=Integer.parseInt(jtCodigo.getText());
+      //  boolean bandera=false;
+       // for(Producto prod:productos){
         
-        if(!bandera){
-        
-            JOptionPane.showMessageDialog(this,"Producto no encontrado");
-        }
+      //      if(prod.getCodigo()==codigo){
+       //         bandera=true;
+       //         jtDescripcion.setText(prod.getDescripcion());
+       //         jtPrecio.setText(prod.getPrecio()+"");
+      //          jtStock.setText(prod.getStock()+"");
+      //          jtCategoria.setText(prod.getCategoria());
+      //      }
+      //  }
+      //  
+       // if(!bandera){
+      //  
+       //     JOptionPane.showMessageDialog(this,"Producto no encontrado");
+       // }
         
     }//GEN-LAST:event_jbBuscarActionPerformed
 
@@ -216,4 +245,18 @@ public class ConsultaProducto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtPrecio;
     private javax.swing.JTextField jtStock;
     // End of variables declaration//GEN-END:variables
+private boolean validaEntero(String nro) {
+
+        Pattern patron = Pattern.compile("^[0-9]+$");
+        Matcher m = patron.matcher(nro);
+        return m.matches();
+    }
+
+    private boolean validaReal(String nro) {
+        Pattern patron = Pattern.compile("^[0-9]+.[0-9]{2}$");
+        Matcher m = patron.matcher(nro);
+        return m.matches();
+
+    }
+
 }

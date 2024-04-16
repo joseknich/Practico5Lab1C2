@@ -27,7 +27,6 @@ private HashSet<Producto> productos=new HashSet<>();
         jmProducto = new javax.swing.JMenu();
         jmiAlta = new javax.swing.JMenuItem();
         jmiConsultas = new javax.swing.JMenuItem();
-        jmSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,9 +60,6 @@ private HashSet<Producto> productos=new HashSet<>();
         jmProducto.add(jmiConsultas);
 
         jMenuBar1.add(jmProducto);
-
-        jmSalir.setText("Salir");
-        jMenuBar1.add(jmSalir);
 
         setJMenuBar(jMenuBar1);
 
@@ -150,7 +146,6 @@ private HashSet<Producto> productos=new HashSet<>();
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jmProducto;
-    private javax.swing.JMenu jmSalir;
     private javax.swing.JMenuItem jmiAlta;
     private javax.swing.JMenuItem jmiConsultas;
     // End of variables declaration//GEN-END:variables
